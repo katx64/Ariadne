@@ -1,0 +1,73 @@
+# Build output
+bin/
+obj/
+out/
+
+# .NET runtime config & deps (auto-generated)
+*.deps.json
+*.runtimeconfig.json
+*.runtimeconfig.dev.json
+
+# Compiled binaries & debug symbols
+*.dll
+*.exe
+*.pdb
+*.ilk
+*.lib
+
+# NuGet
+*.nupkg
+*.snupkg
+project.nuget.cache
+project.assets.json
+packages/
+.nuget/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.rsuser
+*.VC.db
+*.VC.opendb
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code
+.vscode/
+
+# MSBuild auto-generated files
+*.csproj.nuget.dgspec.json
+*.csproj.nuget.g.props
+*.csproj.nuget.g.targets
+*.GeneratedMSBuildEditorConfig.editorconfig
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+*.GlobalUsings.g.cs
+*.assets.cache
+*.csproj.CoreCompileInputs.cache
+*.csproj.FileListAbsolute.txt
+*.genruntimeconfig.cache
+*.sourcelink.json
+*.NETCoreApp,Version=*.AssemblyAttributes.cs
+apphost.exe
+ref/
+refint/
+
+# Test results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverage*/
+
+# Logs & temp
+*.log
+*.tmp
+*.temp
+Thumbs.db
+.DS_Store
