@@ -17,9 +17,10 @@ namespace Ariadne.Core.Structures
             AdjacencyList!.Add(vertex, new List<Edge>());
         }
 
+        // Info: Every edge in List<Edge> will have a unique Id, so it doesn't matter.
         public void AddEdge(Edge edge)
         {
-            AdjacencyList![edge.To!].Add(edge);
+            AdjacencyList![edge.From!].Add(edge);
         }
 
         public Vertex? GetVertex(NodeType type)
@@ -53,8 +54,9 @@ namespace Ariadne.Core.Structures
                 Console.Write($"[INFO]: V[{v.Id}, {(char)v.Type!}] :: ");
                 foreach (Edge e in GetList(v))
                 {
-                    Console.Write($"E[{e.Id}, {e.Weight}, {e.From!}, {e.To!}] -> ");
+                    Console.Write($"E[{e.Id}, {e.Weight}, {e.From!.Id}, {e.To!.Id}] -> ");
                 }
+                Console.WriteLine();
             }
         }
 

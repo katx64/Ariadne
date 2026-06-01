@@ -6,7 +6,7 @@ namespace Ariadne.Core.Structures
     // Info: Close -> Blocked or wall.
     internal enum NodeType
     {
-        Entry, Exit, Open, Close
+        Entry = 'S', Exit = 'E', Open = ' ', Close = '#'
     }
 
     internal class Vertex
