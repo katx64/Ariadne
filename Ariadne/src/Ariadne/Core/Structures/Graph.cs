@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Ariadne.Core.Structures
 {
@@ -13,24 +15,33 @@ namespace Ariadne.Core.Structures
 
         public void AddVertex(Vertex vertex)
         {
-            
+            AdjacencyList!.Add(vertex, new List<Edge>());
         }
 
         public void AddEdge(Edge edge)
         {
-            
+            AdjacencyList![edge.To!].Add(edge);
         }
 
-        public Vertex GetVertex(Type type)
+        public Vertex? GetVertex(NodeType type)
         {
-            
+            foreach (Vertex v in AdjacencyList!.Keys)
+            {
+                if (v.Type == type)
+                {
+                    return v;
+                }
+            }
+
+            return null;
         }
 
         public List<Edge> GetList(Vertex vertex)
         {
-            
+            return AdjacencyList![vertex];
         }
 
+        // Info: Garbage collector takes care of the old adjacency list.
         public void Reset()
         {
             Initialize();
@@ -38,7 +49,14 @@ namespace Ariadne.Core.Structures
 
         public void Print()
         {
-            
+            foreach (Vertex v in AdjacencyList!.Keys)
+            {
+                Console.Write($"[INFO]: V[{v.Id}, {(char)v.Type!}] :: ");
+                foreach (Edge e in GetList(v))
+                {
+                    Console.Write($"E[{e.Id}, {e.Weight}, {e.From!}, {e.To!}] -> ");
+                }
+            }
         }
 
         private void Initialize()
