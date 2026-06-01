@@ -1,5 +1,3 @@
-using System;
-
 namespace Ariadne.Core.Structures
 {
     // Info: Entry -> Starting point.
