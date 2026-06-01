@@ -22,7 +22,7 @@ namespace Ariadne.Core.Structures
 
         public bool Equals(Vertex? other)
         {
-            return other != null && other!.Id == Id; 
+            return other is not null && other!.Id == Id; 
         }
 
         public override bool Equals(object? obj)
