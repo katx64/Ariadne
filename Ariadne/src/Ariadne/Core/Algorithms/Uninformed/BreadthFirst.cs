@@ -15,7 +15,7 @@ namespace Ariadne.Core.Algorithms.Uninformed
             Vertex? exit = graph.GetVertex(NodeType.Exit);
             if (entry is null || exit is null)
             {
-                Console.WriteLine("[INFO]: Entry OR Exit vertex is null!");
+                Console.WriteLine("[INFO]: Entry OR Exit is null!");
 
                 return;
             }
@@ -24,7 +24,7 @@ namespace Ariadne.Core.Algorithms.Uninformed
             HashSet<Vertex> visited = new HashSet<Vertex>();
 
             visited.Add(entry!);
-            queue.Enqueue(entry);
+            queue.Enqueue(entry!);
             while(queue.Count > 0)
             {
                 Vertex current = queue.Dequeue();
@@ -46,7 +46,7 @@ namespace Ariadne.Core.Algorithms.Uninformed
                 }
             }
             
-            Console.WriteLine("[INFO]: No path has been found!");
+            Console.WriteLine("[WARNING]: No path has been found!");
         }
     }
 }
