@@ -7,7 +7,8 @@ namespace Ariadne.Core.Structures
         public Vertex? From { get; set; } = null;
         public Vertex? To { get; set; } = null;
 
-        public Edge(uint id, int weight, Vertex from, Vertex to)
+        // Warning: From and To can be null, but should never be null.
+        public Edge(uint id, int weight, Vertex? from, Vertex? to)
         {
             Id = id;
             Weight = weight;

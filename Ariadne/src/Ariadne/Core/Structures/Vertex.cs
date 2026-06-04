@@ -14,7 +14,8 @@ namespace Ariadne.Core.Structures
         public uint Id { get; private set; } = 0;
         public NodeType? Type { get; set; } = null;
 
-        public Vertex(uint id, NodeType type)
+        // Warning: NodeType can be null, but should never be null.
+        public Vertex(uint id, NodeType? type)
         {
             Id = id;
             Type = type;
@@ -22,7 +23,7 @@ namespace Ariadne.Core.Structures
 
         public bool Equals(Vertex? other)
         {
-            return other is not null && other!.Id == Id; 
+            return other is not null && other.Id == Id; 
         }
 
         public override bool Equals(object? obj)
@@ -32,7 +33,7 @@ namespace Ariadne.Core.Structures
 
         public override int GetHashCode()
         {
-            return (int)Id;
+            return Id.GetHashCode();
         }
     }
 }
