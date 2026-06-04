@@ -1,21 +1,22 @@
 namespace Ariadne.Core.Structures
 {
-    // Info: Entry -> Starting point.
-    // Info: Exit  -> Target point.
-    // Info: Open  -> Passage or path.
-    // Info: Close -> Blocked or wall.
+    // Info: Other          -> None.
+    // Info: Source         -> Start.
+    // Info: Sink           -> Exit.
+    // Info: Accessible     -> Path.
+    // Info: Inaccessible   -> Wall.
     internal enum NodeType
     {
-        Entry = 'S', Exit = 'E', Open = ' ', Close = '#'
+        Other = 'O', Source = 'S', Sink = 'E', Accessible = 'A', Inaccessible = 'I'
     }
 
     internal class Vertex
     {
         public uint Id { get; private set; } = 0;
-        public NodeType? Type { get; set; } = null;
+        public NodeType Type { get; set; } = NodeType.Other;
 
         // Warning: NodeType can be null, but should never be null.
-        public Vertex(uint id, NodeType? type)
+        public Vertex(uint id, NodeType type)
         {
             Id = id;
             Type = type;

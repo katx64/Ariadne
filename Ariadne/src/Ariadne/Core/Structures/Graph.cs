@@ -6,12 +6,9 @@ namespace Ariadne.Core.Structures
 {
     internal class Graph
     {
-        public Dictionary<Vertex, List<Edge>>? AdjacencyList { get; private set; } = null;
+        public Dictionary<Vertex, List<Edge>> AdjacencyList { get; private set; } = new Dictionary<Vertex, List<Edge>>();
 
-        public Graph()
-        {
-            Initialize();
-        }
+        public Graph() { }
 
         public void AddVertex(Vertex? vertex)
         {
@@ -22,7 +19,7 @@ namespace Ariadne.Core.Structures
                 return;    
             }
 
-            AdjacencyList!.Add(vertex, new List<Edge>());
+            AdjacencyList.Add(vertex, new List<Edge>());
         }
 
         // Info: Every edge in List<Edge> will have a unique Id, so it doesn't matter.
@@ -37,32 +34,40 @@ namespace Ariadne.Core.Structures
 
             if (edge.From is null)
             {
-                Console.WriteLine("[Warning]: Edge \"From\" Vertex is null! Edge can not be added!");
+                Console.WriteLine("[Warning]: Vertex \"From\" of edge is null! Edge can not be added!");
 
                 return;
             }
-
-            if (!AdjacencyList!.ContainsKey(edge.From))
+            
+            if (edge.To is null)
             {
-                Console.WriteLine("[Warning]: Edge \"From\" Vertex can not be found in adjacency list! Edge can not be added!");
+                Console.WriteLine("[Warning]: Vertex \"To\" of edge is null! Edge can not be added!");
 
                 return;
             }
 
-            AdjacencyList![edge.From].Add(edge);
+            if (!AdjacencyList.ContainsKey(edge.From))
+            {
+                Console.WriteLine("[Warning]: Vertex \"From\" of edge can not be found in adjacency list! Edge can not be added!");
+
+                return;
+            }
+
+            if (!AdjacencyList.ContainsKey(edge.To))
+            {
+                Console.WriteLine("[Warning]: Vertex \"To\" of edge can not be found in adjacency list! Edge can not be added!");
+
+                return;
+            }
+
+            AdjacencyList[edge.From].Add(edge);
         }
 
         // Info: Find the Vertex with .Type == type. If not return null.
-        public Vertex? GetVertex(NodeType? type)
+        public Vertex? GetVertex(NodeType type)
         {
-            if (type is null)
-            {
-                Console.WriteLine("[Warning]: NodeType is null! Returning null!");
-
-                return null;
-            }
-
-            Vertex? vertex = AdjacencyList!.Keys.FirstOrDefault(vertex => vertex.Type == type);
+            Vertex? vertex = AdjacencyList.Keys.FirstOrDefault(vertex => vertex.Type == type);
+            // Info: This is for debugging!
             if (vertex is null)
             {
                 Console.WriteLine("[Warning]: Vertex with .Type == type is null! Returning null!");
@@ -73,7 +78,7 @@ namespace Ariadne.Core.Structures
             return vertex;
         }
 
-        public List<Edge> GetEdgeArray(Vertex? vertex)
+        public List<Edge> GetEdgeList(Vertex? vertex)
         {
             if (vertex is null)
             {
@@ -82,38 +87,47 @@ namespace Ariadne.Core.Structures
                 return new List<Edge>();
             }
 
-            if (!AdjacencyList!.ContainsKey(vertex))
+            if (!AdjacencyList.ContainsKey(vertex))
             {
                 Console.WriteLine("[Warning]: Vertex can not be found in adjacency list! Returning empty List<Edge>!");
 
                 return new List<Edge>();
             }
 
-            return AdjacencyList![vertex];
+            return AdjacencyList[vertex];
+        }
+
+        // Info: Get Vertex with .Type == NodeType.Source and .Type == NodeType.Sink!
+        public (Vertex? source, Vertex? sink) GetSourceAndSink()
+        {
+            return (GetVertex(NodeType.Source), GetVertex(NodeType.Sink));
+        }
+
+        public bool ContainsSourceAndSink()
+        {
+            (Vertex? source, Vertex? sink) = GetSourceAndSink();
+
+            return source is not null && sink is not null;
         }
 
         // Info: Garbage collector takes care of the old adjacency list.
         public void Reset()
         {
-            Initialize();
+            AdjacencyList = new Dictionary<Vertex, List<Edge>>();
         }
 
         public void Print()
         {
-            foreach (Vertex v in AdjacencyList!.Keys)
+            foreach (Vertex v in AdjacencyList.Keys)
             {
-                Console.Write($"[Info]: V[{v.Id}, {(v.Type is null ? "null" : (char)v.Type)}]");
-                foreach (Edge e in GetEdgeArray(v))
+                Console.Write($"[Info]: V[{v.Id}, {(char)v.Type}] :: ");
+                foreach (Edge e in GetEdgeList(v))
                 {
-                    Console.Write($"E[{e.Id}, {e.Weight}, {(e.From is null ? "null" : e.From.Id)}, {(e.To is null ? "null" : e.To.Id)}] -> ");
+                    Console.Write($"E[{e.Id}, {e.Weight}, {e.From!.Id}, {e.To!.Id}] -> ");
                 }
+
                 Console.WriteLine();
             }
-        }
-
-        private void Initialize()
-        {
-            AdjacencyList = new Dictionary<Vertex, List<Edge>>();
         }
     }
 }
