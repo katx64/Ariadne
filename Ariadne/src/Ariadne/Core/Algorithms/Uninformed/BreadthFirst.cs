@@ -11,41 +11,40 @@ namespace Ariadne.Core.Algorithms.Uninformed
 
         public override void Search(Graph graph)
         {
-            Vertex? entry = graph.GetVertex(NodeType.Entry);
-            Vertex? exit = graph.GetVertex(NodeType.Exit);
-            if (entry is null || exit is null)
+            if (!graph.ContainsSourceAndSink())
             {
-                Console.WriteLine("[INFO]: Entry OR Exit is null!");
+                Console.WriteLine("[Error]: Graph does not contains source and-or sink!");
 
                 return;
             }
 
-            Queue<Vertex> queue = new Queue<Vertex>();
-            HashSet<Vertex> visited = new HashSet<Vertex>();
+            (Vertex? source, Vertex? sink) = graph.GetSourceAndSink();
 
-            visited.Add(entry!);
-            queue.Enqueue(entry!);
-            while(queue.Count > 0)
+            HashSet<Vertex> visited = new HashSet<Vertex>();
+            Queue<Vertex> frontier = new Queue<Vertex>();
+            
+            visited.Add(source!);
+            frontier.Enqueue(source!);
+            while(frontier.Count > 0)
             {
-                Vertex current = queue.Dequeue();
-                if (current.Id == exit!.Id)
+                Vertex current = frontier.Dequeue();
+                if (current.Id == sink!.Id)
                 {
                     Console.WriteLine("[INFO]: Path has been found!");
 
                     return;
                 }
 
-                List<Edge> edges = graph.GetList(current);
-                foreach (Edge e in edges)
+                foreach (Edge e in graph.GetEdgeList(current))
                 {
                     if (!visited.Contains(e.To!))
                     {
                         visited.Add(e.To!);
-                        queue.Enqueue(e.To!);
+                        frontier.Enqueue(e.To!);
                     }
                 }
             }
-            
+
             Console.WriteLine("[WARNING]: No path has been found!");
         }
     }
