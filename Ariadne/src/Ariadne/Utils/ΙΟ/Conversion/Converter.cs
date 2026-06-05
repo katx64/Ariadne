@@ -16,7 +16,7 @@ namespace Ariadne.Utils.IO.Conversion
             int height = lines.Length;
             if (height == 0)
             {
-                Console.WriteLine("[Warning]: Can not convert to vertices!");
+                Console.WriteLine("[Error]: Can not convert to vertices! Returning empty Vertex[0, 0]!");
 
                 return new Vertex[0, 0];
             }
@@ -24,7 +24,7 @@ namespace Ariadne.Utils.IO.Conversion
             int width = lines[0].Length;
             if (width == 0)
             {
-                Console.WriteLine("[Warning]: Can not convert to vertices!");
+                Console.WriteLine("[Error]: Can not convert to vertices! Returning empty Vertex[0, 0]!");
 
                 return new Vertex[0, 0];
             }
@@ -57,7 +57,7 @@ namespace Ariadne.Utils.IO.Conversion
             int width = vertices.GetLength(1);
             if (height == 0 || width == 0)
             {
-                Console.WriteLine("[Warning]: Can not convert to graph!");
+                Console.WriteLine("[Warning]: Can not convert to graph! Returning empty graph!");
 
                 return new Graph();
             }
