@@ -78,7 +78,7 @@ namespace Ariadne.Core.Structures
             return vertex;
         }
 
-        public List<Edge> GetEdgeList(Vertex? vertex)
+        public List<Edge> GetEdges(Vertex? vertex)
         {
             if (vertex is null)
             {
@@ -121,7 +121,7 @@ namespace Ariadne.Core.Structures
             foreach (Vertex v in AdjacencyList.Keys)
             {
                 Console.Write($"[Info]: V[{v.Id}, {(char)v.Type}] :: ");
-                foreach (Edge e in GetEdgeList(v))
+                foreach (Edge e in GetEdges(v))
                 {
                     Console.Write($"E[{e.Id}, {e.Weight}, {e.From!.Id}, {e.To!.Id}] -> ");
                 }

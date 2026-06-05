@@ -7,7 +7,7 @@ namespace Ariadne.Core.Structures
     // Info: Inaccessible   -> Wall.
     internal enum NodeType
     {
-        Other = 'O', Source = 'S', Sink = 'E', Accessible = 'A', Inaccessible = 'I'
+        Other = 'O', Source = 'S', Sink = 'E', Accessible = ' ', Inaccessible = '#'
     }
 
     internal class Vertex

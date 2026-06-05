@@ -35,7 +35,7 @@ namespace Ariadne.Core.Algorithms.Uninformed
                     return;
                 }
 
-                foreach (Edge e in graph.GetEdgeList(current))
+                foreach (Edge e in graph.GetEdges(current))
                 {
                     if (!visited.Contains(e.To!))
                     {
