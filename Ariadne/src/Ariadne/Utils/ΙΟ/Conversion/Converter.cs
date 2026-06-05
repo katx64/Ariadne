@@ -14,8 +14,15 @@ namespace Ariadne.Utils.IO.Conversion
         public static Vertex[,] ToVertexArray(string[] lines)
         {
             int height = lines.Length;
+            if (height == 0)
+            {
+                Console.WriteLine("[Warning]: Can not convert to vertices!");
+
+                return new Vertex[0, 0];
+            }
+
             int width = lines[0].Length;
-            if (height == 0 || width == 0)
+            if (width == 0)
             {
                 Console.WriteLine("[Warning]: Can not convert to vertices!");
 
