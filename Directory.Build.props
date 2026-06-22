@@ -1,0 +1,8 @@
+<Project>
+  <PropertyGroup>
+    <Authors>katx64</Authors>
+    <Copyright>Copyright © katx64 $([System.DateTime]::Now.Year)</Copyright>
+    <RepositoryUrl>https://github.com/katx64/Ariadne</RepositoryUrl>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
+  </PropertyGroup>
+</Project>
